@@ -7,7 +7,7 @@ High Level Design Deliverables
   Cloud technologies 
     * [Overall Architecture](./design-documents/overall_architecture.png)
 
-  * Wireframes of your UI (DONE)
+  * Wireframes of your UI
     * [Overall Wireframes](./design-documents/wireframes.md)
   * Description of each of your backend modules and 
     * [Description of Backend Modules](./design-documents/modules.md)
