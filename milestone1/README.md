@@ -5,7 +5,7 @@
 High Level Design Deliverables
   * Diagram of your overall architecture; if you want, feel free to include any use of 
   Cloud technologies 
-    * [Overall Architecture](./design-documents/sequence_diagram.jpg)
+    * [Overall Architecture](./design-documents/overall_architecture.png)
 
   * Wireframes of your UI (DONE)
     * [Overall Wireframes](./design-documents/wireframes.md)
