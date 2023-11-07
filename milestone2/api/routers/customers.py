@@ -31,11 +31,17 @@ db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, (Depends(get_current_user))]
 
 
-
-@router.get("/read-all-customers")
-async def read_all_customers(user: user_dependency, db: db_dependency):
+# Return all business owners
+@router.get("/business-owners", status_code=status.HTTP_200_OK)
+async def read_all_business_owners(user: user_dependency, db: db_dependency):
     check_user_authentication(user)
-    return db.query(Users).all()
+    return db.query(Users).filter(Users.role == 'business_owner').all()
+
+# Return all developers
+@router.get("/developers", status_code=status.HTTP_200_OK)
+async def read_all_developers(user: user_dependency, db: db_dependency):
+    check_user_authentication(user)
+    return db.query(Users).filter(Users.role == 'developer').all()
 
 # Delete customer by id
 @router.delete("/customer/{customer_id}", status_code=status.HTTP_204_NO_CONTENT)
