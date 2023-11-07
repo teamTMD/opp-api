@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from routers.auth import get_current_user
 from routers.helpers import check_user_authentication
 
-from models.models import Todos
+from models.models import Todos, Transactions
 from db.database import SessionLocal
 
 router = APIRouter()
@@ -35,12 +35,30 @@ class TodoRequest(BaseModel):
     description: str = Field(min_length=3, max_length=100)
     priority: int = Field(gt=0, lt=6)
     complete: bool
+    
+class TransactionRequest(BaseModel):
+    iplocation_state: str = Field(min_length=3)
+    iplocation_city: str = Field(min_length=3)
+    transaction_amount: int = Field(gt=0, lt=6)
+    transaction_date: int = Field(gt=0, lt=6)
+    processed: bool
+    payment_id: int = Field(gt=0, lt=6)
 
 
 @router.get("/read-all")
 async def read_all(user: user_dependency, db: db_dependency):
     check_user_authentication(user)
     return db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
+
+@router.get("/mytransactions")
+async def read_all(user: user_dependency, db: db_dependency):
+    check_user_authentication(user)
+    return db.query(Transactions).filter(Transactions.user_id == user.get('id')).all()
+
+@router.get("/userpending")
+async def read_all(user: user_dependency, db: db_dependency):
+    check_user_authentication(user)
+    return db.query(Transactions).filter(Transactions.user_id == user.get('id')).filter(Transactions.processed == False).all()
 
 
 @router.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
@@ -63,6 +81,15 @@ async def create_todo(user: user_dependency, db: db_dependency, todo_request: To
     todo_model = Todos(**todo_request.model_dump(), owner_id=user.get('id'))
 
     db.add(todo_model)
+    db.commit()
+    
+@router.post("/mytransactions", status_code=status.HTTP_201_CREATED)
+async def create_transaction(user: user_dependency, db: db_dependency, transaction_request: TransactionRequest):
+    check_user_authentication(user)
+
+    transaction_model = Transactions(**transaction_request.model_dump(), user_id=user.get('id'))
+
+    db.add(transaction_model)
     db.commit()
 
 

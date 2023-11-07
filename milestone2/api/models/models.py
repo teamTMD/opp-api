@@ -1,5 +1,5 @@
 from db.database import Base
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float, DateTime
 
 
 class Users(Base):
@@ -24,8 +24,20 @@ class Todos(Base):
     priority = Column(Integer)
     complete = Column(Boolean, default=False)
     owner_id = Column(Integer, ForeignKey("users.id"))
-
-
+    
+class Transactions(Base):
+    __tablename__ = 'transactions'
+    
+    transaction_id = Column(Integer, primary_key=True, index=True)
+    iplocation_state = Column(String)
+    iplocation_city = Column(String)
+    transaction_amount = Column(Integer)
+    transaction_date = Column(DateTime)
+    processed = Column(Boolean, default=False)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    payment_id = Column(Integer)    
+    
+    
 class GenericObject(Base):
     __tablename__ = 'generics'
 
