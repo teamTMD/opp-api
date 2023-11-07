@@ -40,7 +40,7 @@ class TodoRequest(BaseModel):
 @router.get("/read-all")
 async def read_all(user: user_dependency, db: db_dependency):
     check_user_authentication(user)
-    return db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
+    return db.query(Todos).filter(git Todos.owner_id == user.get('id')).all()
 
 
 @router.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
