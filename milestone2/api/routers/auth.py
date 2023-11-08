@@ -88,6 +88,7 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     return {'access_token': token, 'token_type': 'bearer'}
 
 
+# TC - Getting called by login_for_access_token
 def authenticate_user(username: str, password: str, db: db_dependency) -> Any:
     user = db.query(Users).filter(Users.username == username).first()
     if not user:
@@ -97,20 +98,24 @@ def authenticate_user(username: str, password: str, db: db_dependency) -> Any:
 
     return user
 
-
+# TC - Getting called by login_for_access_token
 def create_access_token(username: str, user_id: int, role: str, expires_delta: timedelta):
     claims = {'sub': username, 'id': user_id, 'role': role}
     expires = datetime.utcnow() + expires_delta
     claims.update({'exp': expires})
-    #### NEED TO FIX THE BUG HERE, SECRET KEY and algo not being referenced anywhere
     token = jwt.encode(claims, SECRET_KEY, algorithm=ALGORITHM)
     return token
 
 
 # TC - Getting current user called to verify user with JSON WEB TOKEN
 async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
+
+    # Need to make sure the current user has used an auth token else they should not have access
     try:
+        print("Checking the current user")
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        print("Payload is: ", payload)
+        # Extracting from the token all the info we need to see if the user is authorized
         username: str = payload.get('sub')
         user_id: int = payload.get('id')
         user_role: str = payload.get('role')
