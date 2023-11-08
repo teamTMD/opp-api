@@ -1,5 +1,9 @@
 from db.database import Base
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float
+from sqlalchemy.orm import relationship
+
+from enum import Enum as PythonEnum
+from sqlalchemy import Enum, Date
 
 
 class Users(Base):
@@ -34,6 +38,30 @@ class GenericObject(Base):
     price = Column(Float)
 
 
+# class PaymentTypeEnum(PythonEnum):
+#     DEBITCARD = "DEBITCARD"
+#     CREDITCARD = "CREDITCARD"
+
+class PaymentType(Base):
+    __tablename__ = 'payment_type'
+
+    PaymentId = Column(Integer, primary_key=True, autoincrement=True)
+    StreetAddress = Column(String)
+    State = Column(String)
+    ZipCode = Column(Integer)
+    CardNumber = Column(Integer)
+    Expiration = Column(String)
+    CVV = Column(Integer)
+    ProcessingTime = Column(Integer)
+    Validated = Column(Boolean)
+    RecipientId = Column(Integer)
+    Type = Column(String)
+    AccountBalance = Column(Integer, default=0)
+    CardLimit = Column(Integer, default=0)
+    CardBalance = Column(Integer, default=0)
+    CardCompany = Column(String, default="")
+    WeeklyTransactionCount = Column(Integer, default=0)
+    TimeSinceLastTransaction = Column(Integer, default=0)
 
 
 

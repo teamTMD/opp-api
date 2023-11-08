@@ -8,7 +8,6 @@ from sqlalchemy.orm import Session
 from routers.auth import get_current_user
 from routers.helpers import check_user_authentication
 
-from models.models import Todos
 from models.models import Users
 from db.database import SessionLocal
 
