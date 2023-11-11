@@ -7,7 +7,7 @@ from sqlalchemy import Enum, Date
 
 
 class Users(Base):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True)
@@ -19,8 +19,9 @@ class Users(Base):
     role = Column(String)
     phone_number = Column(String)
 
+
 class Todos(Base):
-    __tablename__ = 'todos'
+    __tablename__ = "todos"
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
@@ -31,7 +32,7 @@ class Todos(Base):
 
 
 class GenericObject(Base):
-    __tablename__ = 'generics'
+    __tablename__ = "generics"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
@@ -42,8 +43,9 @@ class GenericObject(Base):
 #     DEBITCARD = "DEBITCARD"
 #     CREDITCARD = "CREDITCARD"
 
+
 class PaymentType(Base):
-    __tablename__ = 'payment_type'
+    __tablename__ = "payment_type"
 
     PaymentId = Column(Integer, primary_key=True, autoincrement=True)
     CardNumber = Column(Integer)
@@ -60,10 +62,11 @@ class PaymentType(Base):
     # WeeklyTransactionCount = Column(Integer, default=0)
     # TimeSinceLastTransaction = Column(Integer, default=0)
 
-class Transactions(Base):
-    __tablename__ = 'transactions'
 
-    transaction_id = Column(Integer, primary_key=True, index=True,  autoincrement=True)
+class Transactions(Base):
+    __tablename__ = "transactions"
+
+    transaction_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     iplocation_state = Column(String)
     iplocation_city = Column(String)
     transaction_amount = Column(Integer)
@@ -71,8 +74,4 @@ class Transactions(Base):
     transaction_date = Column(String)
     processed = Column(Boolean, default=False)
     user_id = Column(Integer, ForeignKey("users.id"))
-    payment_id = Column(Integer)   
-
-
-
-
+    payment_id = Column(Integer)
