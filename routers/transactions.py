@@ -38,12 +38,11 @@ user_dependency = Annotated[dict, (Depends(get_current_user))]
 
 
 class TransactionRequest(BaseModel):
-    iplocation_state: str = Field(min_length=3)
     iplocation_city: str = Field(min_length=3)
-    transaction_amount: int = Field(gt=0, lt=6)
-    transaction_date: str = Field(gt=0, lt=6)
+    iplocation_state: str = Field(min_length=2)
+    transaction_amount: int = Field(gt=0)
+    transaction_date: str = Field(min_length=3)
     processed: bool
-    payment_id: int = Field(gt=0, lt=6)
 
 
 @router.get("/mytransactions")
