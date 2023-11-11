@@ -17,5 +17,4 @@ app.include_router(transactions.router)
 app.include_router(admin.router)
 app.include_router(payment_type.router)
 
-# Potentially Add CORS here 
-
+# Potentially Add CORS here

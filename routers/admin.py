@@ -8,7 +8,7 @@ from routers.auth import get_current_user
 from models.models import Users, Todos, Transactions
 from db.database import SessionLocal
 
-router = APIRouter(prefix='/admin', tags=['admin'])
+router = APIRouter(prefix="/admin", tags=["admin"])
 
 
 def get_db():
@@ -24,19 +24,21 @@ db_dependency = Annotated[Session, Depends(get_db)]
 # when an API uses this, it will enforce authorization
 user_dependency = Annotated[dict, (Depends(get_current_user))]
 
-@router.get("/transactions",status_code=status.HTTP_200_OK)
+
+@router.get("/transactions", status_code=status.HTTP_200_OK)
 async def read_all(user: user_dependency, db: db_dependency):
     check_admin_user_auth(user)
     return db.query(Transactions).all()
 
-@router.get("/pending",status_code=status.HTTP_200_OK)
+
+@router.get("/pending", status_code=status.HTTP_200_OK)
 async def read_all(user: user_dependency, db: db_dependency):
     check_admin_user_auth(user)
     # db.query(Transactions).
     return db.query(Transactions).filter(Transactions.processed == False).all()
 
 
-@router.get("/users",status_code=status.HTTP_200_OK)
+@router.get("/users", status_code=status.HTTP_200_OK)
 async def read_all(user: user_dependency, db: db_dependency):
     check_admin_user_auth(user)
     return db.query(Users).all()
@@ -44,5 +46,5 @@ async def read_all(user: user_dependency, db: db_dependency):
 
 def check_admin_user_auth(user):
     # Fixed Typo
-    if user is None or user.get('user_role').lower() != 'admin':
-        raise HTTPException(status_code=401, detail='Authentication Failed')
+    if user is None or user.get("user_role").lower() != "admin":
+        raise HTTPException(status_code=401, detail="Authentication Failed")
