@@ -41,7 +41,7 @@ class TransactionRequest(BaseModel):
     iplocation_city: str = Field(min_length=3)
     iplocation_state: str = Field(min_length=2)
     transaction_amount: int = Field(gt=0)
-    transaction_date: str = Field(min_length=3)
+    transaction_date: str = Field(gt=0)
     processed: bool
 
 
@@ -67,6 +67,8 @@ async def create_transaction(
     user: user_dependency, db: db_dependency, transaction_request: TransactionRequest
 ):
     check_user_authentication(user)
+
+    # transaction_model = Transactions(**transaction_request.model_dump(), user_id=user.get('id'))
     transaction_model = Transactions(
         **transaction_request.model_dump(), user_id=user.get("id")
     )
