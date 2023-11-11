@@ -22,11 +22,10 @@ load_dotenv()  # take environment variables from .env.
 # These are used to create the signature for a JWT
 # UPDATE AND MOVE TO .ENV
 
-
-# SECRET_KEY = '1696edacb812c9f1046065809ae02d8ce46e60ecc8e351b08284555c1bade7e4'
-SECRET_KEY = os.getenv('SECRET_KEY')
-# ALGORITHM = 'HS256'
-ALGORITHM = os.getenv('ALGORITHM')
+SECRET_KEY = '1696edacb812c9f1046065809ae02d8ce46e60ecc8e351b08284555c1bade7e4'
+# SECRET_KEY = os.getenv('SECRET_KEY')
+ALGORITHM = 'HS256'
+# ALGORITHM = os.getenv('ALGORITHM')
 
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')

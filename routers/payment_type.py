@@ -34,9 +34,9 @@ user_dependency = Annotated[dict, (Depends(get_current_user))]
 
 
 class PaymentTypeRequest(BaseModel):
-    StreetAddress: str
-    State: str
-    ZipCode: int 
+    # StreetAddress: str
+    # State: str
+    # ZipCode: int 
     CardNumber: int
     Expiration: str
     CVV: int
@@ -45,17 +45,12 @@ class PaymentTypeRequest(BaseModel):
     RecipientId: int
     Type: str
     AccountBalance: int
-    CardLimit: int
-    CardBalance: int
-    CardCompany: str
-    WeeklyTransactionCount: int
-    TimeSinceLastTransaction: int
+    # CardLimit: int
+    # CardBalance: int
+    # CardCompany: str
+    # WeeklyTransactionCount: int
+    # TimeSinceLastTransaction: int
 
-
-# @router.get("/read-all")
-# async def read_all(user: user_dependency, db: db_dependency):
-#     check_user_authentication(user)
-#     return db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
 
 # Get all payment types
 @router.get("/read-all")
@@ -63,40 +58,6 @@ async def read_all(user: user_dependency, db: db_dependency):
     check_user_authentication(user)
     return db.query(PaymentType).all()
 
-
-
-# @router.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
-# async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(gt=0)):
-#     check_user_authentication(user)
-
-#     todo_model = (
-#         db.query(Todos).filter(Todos.id == todo_id).filter(Todos.owner_id == user.get('id')).first()
-#     )
-
-#     if todo_model is not None:
-#         return todo_model
-#     raise HTTPException(status_code=404, detail='Todo not found')
-
-# @router.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-# async def update_todo(user: user_dependency, db: db_dependency,
-#                       todo_request: TodoRequest,
-#                       todo_id: int = Path(gt=0)):
-#     # why does json.loads throw 500 error
-#     check_user_authentication(user)
-
-#     todo_model = db.query(Todos).filter(Todos.id == todo_id).filter(Todos.owner_id == user.get('id')).first()
-
-#     if todo_model is None:
-#         raise HTTPException(status_code=404, detail="Todo not found")
-
-#     # make the updates
-#     todo_model.title = todo_request.title
-#     todo_model.description = todo_request.description
-#     todo_model.priority = todo_request.priority
-#     todo_model.complete = todo_request.complete
-
-#     db.add(todo_model)
-#     db.commit()
 
 # Update payment type by id
 @router.put("/{payment_type_id}", status_code=status.HTTP_204_NO_CONTENT)

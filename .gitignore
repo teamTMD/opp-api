@@ -168,3 +168,5 @@ node_modules/
 
 # Exclude Node.js package-lock.json file
 package-lock.json
+
+package.json
