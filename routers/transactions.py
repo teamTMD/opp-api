@@ -41,7 +41,7 @@ class TransactionRequest(BaseModel):
     iplocation_city: str = Field(min_length=3)
     iplocation_state: str = Field(min_length=2)
     transaction_amount: int = Field(gt=0)
-    transaction_date: str = Field(gt=0)
+    transaction_date: str = Field(min_length=3)
     processed: bool
 
 
