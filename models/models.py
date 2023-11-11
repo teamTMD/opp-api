@@ -46,22 +46,19 @@ class PaymentType(Base):
     __tablename__ = 'payment_type'
 
     PaymentId = Column(Integer, primary_key=True, autoincrement=True)
-    StreetAddress = Column(String)
-    State = Column(String)
-    ZipCode = Column(Integer)
     CardNumber = Column(Integer)
     Expiration = Column(String)
     CVV = Column(Integer)
     ProcessingTime = Column(Integer)
     Validated = Column(Boolean)
     RecipientId = Column(Integer)
+    # Convert to lower case
     Type = Column(String)
     AccountBalance = Column(Integer, default=0)
-    CardLimit = Column(Integer, default=0)
-    CardBalance = Column(Integer, default=0)
-    CardCompany = Column(String, default="")
-    WeeklyTransactionCount = Column(Integer, default=0)
-    TimeSinceLastTransaction = Column(Integer, default=0)
+    # CardLimit = Column(Integer, default=0)
+    # CardBalance = Column(Integer, default=0)
+    # WeeklyTransactionCount = Column(Integer, default=0)
+    # TimeSinceLastTransaction = Column(Integer, default=0)
 
 class Transactions(Base):
     __tablename__ = 'transactions'
