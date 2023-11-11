@@ -118,9 +118,7 @@ def create_access_token(
 async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
     # Need to make sure the current user has used an auth token else they should not have access
     try:
-        print("Checking the current user")
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        print("Payload is: ", payload)
         # Extracting from the token all the info we need to see if the user is authorized
         username: str = payload.get("sub")
         user_id: int = payload.get("id")
