@@ -67,11 +67,9 @@ class Transactions(Base):
     __tablename__ = "transactions"
 
     transaction_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    iplocation_state = Column(String)
     iplocation_city = Column(String)
+    iplocation_state = Column(String)
     transaction_amount = Column(Integer)
-    # transaction_date = Column(Date)
     transaction_date = Column(String)
     processed = Column(Boolean, default=False)
     user_id = Column(Integer, ForeignKey("users.id"))
-    payment_id = Column(Integer)
