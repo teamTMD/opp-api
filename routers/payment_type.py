@@ -34,9 +34,6 @@ user_dependency = Annotated[dict, (Depends(get_current_user))]
 
 
 class PaymentTypeRequest(BaseModel):
-    # StreetAddress: str
-    # State: str
-    # ZipCode: int
     CardNumber: int
     Expiration: str
     CVV: int
@@ -45,12 +42,6 @@ class PaymentTypeRequest(BaseModel):
     RecipientId: int
     Type: str
     AccountBalance: int
-    # CardLimit: int
-    # CardBalance: int
-    # CardCompany: str
-    # WeeklyTransactionCount: int
-    # TimeSinceLastTransaction: int
-
 
 # Get all payment types
 @router.get("/read-all")
@@ -78,9 +69,6 @@ async def update_payment_type(
         raise HTTPException(status_code=404, detail="Payment type not found")
 
     # make the updates
-    payment_type_model.StreetAddress = payment_type_request.StreetAddress
-    payment_type_model.State = payment_type_request.State
-    payment_type_model.ZipCode = payment_type_request.ZipCode
     payment_type_model.CardNumber = payment_type_request.CardNumber
     payment_type_model.Expiration = payment_type_request.Expiration
     payment_type_model.CVV = payment_type_request.CVV
@@ -89,15 +77,6 @@ async def update_payment_type(
     payment_type_model.RecipientId = payment_type_request.RecipientId
     payment_type_model.Type = payment_type_request.Type
     payment_type_model.AccountBalance = payment_type_request.AccountBalance
-    payment_type_model.CardLimit = payment_type_request.CardLimit
-    payment_type_model.CardBalance = payment_type_request.CardBalance
-    payment_type_model.CardCompany = payment_type_request.CardCompany
-    payment_type_model.WeeklyTransactionCount = (
-        payment_type_request.WeeklyTransactionCount
-    )
-    payment_type_model.TimeSinceLastTransaction = (
-        payment_type_request.TimeSinceLastTransaction
-    )
 
     db.add(payment_type_model)
     db.commit()
