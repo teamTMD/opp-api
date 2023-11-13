@@ -38,17 +38,17 @@ user_dependency = Annotated[dict, (Depends(get_current_user))]
 
 
 class TransactionRequest(BaseModel):
-    iplocation_city: str = Field(min_length=3)
-    iplocation_state: str = Field(min_length=2)
-    transaction_amount: int = Field(gt=0)
-    transaction_date: str = Field(min_length=3)
+    ipLocationCity: str = Field(min_length=3)
+    ipLocationState: str = Field(min_length=2)
+    transactionAmount: int = Field(gt=0)
+    transactionDate: str = Field(min_length=3)
     processed: bool
 
 
 @router.get("/mytransactions")
 async def read_all(user: user_dependency, db: db_dependency):
     check_user_authentication(user)
-    return db.query(Transactions).filter(Transactions.user_id == user.get("id")).all()
+    return db.query(Transactions).filter(Transactions.userId == user.get("id")).all()
 
 
 @router.get("/userpending")
@@ -56,7 +56,7 @@ async def read_all(user: user_dependency, db: db_dependency):
     check_user_authentication(user)
     return (
         db.query(Transactions)
-        .filter(Transactions.user_id == user.get("id"))
+        .filter(Transactions.userId == user.get("id"))
         .filter(Transactions.processed == False)
         .all()
     )
@@ -70,7 +70,7 @@ async def create_transaction(
 
     # transaction_model = Transactions(**transaction_request.model_dump(), user_id=user.get('id'))
     transaction_model = Transactions(
-        **transaction_request.model_dump(), user_id=user.get("id")
+        **transaction_request.model_dump(), userId=user.get("id")
     )
 
     db.add(transaction_model)
