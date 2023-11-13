@@ -93,7 +93,7 @@ def test_put_update_payment_type_failed():
         "AccountBalance": 123
     }
     payment_type_id = 500000
-    response = client.put(f"/payment_type/{payment_type_id}", headers=headers, json= updated_payment_type)
+    response = client.put(f"/payment_type/{payment_type_id}", headers=headers, json=updated_payment_type)
 
     # Check if the response status code is 204 
     assert response.status_code == 404

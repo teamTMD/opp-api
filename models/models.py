@@ -66,10 +66,10 @@ class PaymentType(Base):
 class Transactions(Base):
     __tablename__ = "transactions"
 
-    transaction_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    iplocation_city = Column(String)
-    iplocation_state = Column(String)
-    transaction_amount = Column(Integer)
-    transaction_date = Column(String)
+    transactionId = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    ipLocationCity = Column(String)
+    ipLocationState = Column(String)
+    transactionAmount = Column(Integer)
+    transactionDate = Column(String)
     processed = Column(Boolean, default=False)
-    user_id = Column(Integer, ForeignKey("users.id"))
+    userId = Column(Integer, ForeignKey("users.id"))
