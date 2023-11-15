@@ -2,7 +2,7 @@ from starlette.exceptions import HTTPException
 
 
 def check_user_authentication(user):
-    print("Check user authentication being called ")
+    # print("Check user authentication being called ")
     role = user.get("user_role").lower()
     print(role)
     # developer, business_owner, admin
