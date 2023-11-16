@@ -1,6 +1,6 @@
 from datetime import timedelta, datetime
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Path
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from pydantic import BaseModel
 from starlette import status
@@ -134,3 +134,11 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate user"
         )
+
+@router.delete("/delete_user", status_code=status.HTTP_201_CREATED)
+async def delete_user(db: db_dependency, username: str):
+    user_model = db.query(Users).filter(Users.username == username).first()
+    if user_model is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    db.query(Users).filter(Users.username == username).delete()
+    db.commit()

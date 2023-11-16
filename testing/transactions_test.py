@@ -6,8 +6,6 @@ from datetime import timedelta, datetime
 
 client = TestClient(app)
 
-
-
 def test_post_transactions():
     access_token = create_access_token(username="test", user_id=1, role="admin", expires_delta=timedelta(minutes=60))
     headers = {"Authorization": f"Bearer {access_token}"}
