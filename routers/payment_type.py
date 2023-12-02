@@ -43,6 +43,7 @@ class PaymentTypeRequest(BaseModel):
     Type: str
     AccountBalance: int
 
+
 # Get all payment types
 @router.get("/read-all")
 async def read_all(user: user_dependency, db: db_dependency):
@@ -141,25 +142,30 @@ async def validate_card_number(
         return response.json()
     else:
         return response.text
-    
+
+
 #   * Process card API: process_card(card_number, amt) => { 'success': <bool>, 'msg': <str> }
 #       * URL: https://223didiouo3hh4krxhm4n4gv7y0pfzxk.lambda-url.us-west-2.on.aws
 #     * Example: `curl https://223didiouo3hh4krxhm4n4gv7y0pfzxk.lambda-url.us-west-2.on.aws -d '{"card_number": "4147202464191053", "amt": 100.00}' -H 'content-type: application/json'`
 #     * Response: `{"success": "true", "msg": "card number successfully processed"}`
 
 
-PROCESS_CARD_URL = 'https://223didiouo3hh4krxhm4n4gv7y0pfzxk.lambda-url.us-west-2.on.aws'
+PROCESS_CARD_URL = (
+    "https://223didiouo3hh4krxhm4n4gv7y0pfzxk.lambda-url.us-west-2.on.aws"
+)
+
+
 @router.post("/process-card", status_code=status.HTTP_200_OK)
 async def process_card(
     user: user_dependency, db: db_dependency, card_number: str, amt: str
-):          
+):
     # Test Valid Card Number: 4147202464191053
     check_user_authentication(user)
     data = {"card_number": card_number, "amt": amt}
     # print(f"card number: {data}")
 
     # Get the response from lambda function
-    response = requests.post(PROCESS_CARD_URL, json = data)
+    response = requests.post(PROCESS_CARD_URL, json=data)
 
     if response.status_code == 200:
         return response.text

@@ -135,6 +135,7 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate user"
         )
 
+
 @router.delete("/delete_user", status_code=status.HTTP_201_CREATED)
 async def delete_user(db: db_dependency, username: str):
     user_model = db.query(Users).filter(Users.username == username).first()

@@ -48,4 +48,3 @@ def check_admin_user_auth(user):
     # Fixed Typo
     if user is None or user.get("user_role").lower() != "admin":
         raise HTTPException(status_code=401, detail="Authentication Failed")
-    

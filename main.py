@@ -4,6 +4,7 @@ from models import models
 from db.database import engine
 from routers import auth, admin, customers, payment_type, transactions
 
+
 # application
 app = FastAPI()
 

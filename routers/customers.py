@@ -25,8 +25,6 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 # when an API uses this, it will enforce authorization
-
-# TC - DB dependency is enforeced when used in an API
 user_dependency = Annotated[dict, (Depends(get_current_user))]
 
 
