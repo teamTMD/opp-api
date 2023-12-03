@@ -59,3 +59,6 @@ Docker Container Running:
 - docker rm #####
     - delete a docker container 
 
+## Running Pylint 
+
+- pylint models testing routers main.py

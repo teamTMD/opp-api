@@ -16,8 +16,6 @@ from typing import Annotated, Any
 from sqlalchemy.orm import Session
 
 
-
-
 # python3 -m pytest testing/
 # python3 -m pytest --cov=src --cov-report=html testing/
 
@@ -25,9 +23,10 @@ from sqlalchemy.orm import Session
 # Create an instance of the TestClient class
 client = TestClient(app)
 
+
 def test_post_create_user():
     # Make a POST request to the /user endpoint with the access token
-    # random_number = random.randint(1, 10000000000) 
+    # random_number = random.randint(1, 10000000000)
 
     new_user = {
         "email": "test@test.com",
@@ -43,10 +42,10 @@ def test_post_create_user():
     response = client.delete("/auth/delete_user", params={"username": "test_user"})
     assert response.status_code == 201
 
-def test_post_token():
 
-    #form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-    # Create form data 
+def test_post_token():
+    # form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    # Create form data
     form_data = {
         "username": "developer",
         "password": "developer",
@@ -60,4 +59,3 @@ def test_post_token():
 #     # authenticate_user(username: str, password: str, db: db_dependency)
 #     db_dependency = Annotated[Session, Depends(get_db)]
 #     user = authenticate_user(username="test", password="test", db=db_dependency)
-
