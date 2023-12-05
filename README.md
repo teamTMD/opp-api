@@ -33,9 +33,14 @@ Docker Container Running:
 ## Docker-related commands
 
 - docker build -t teamtmdimage:v1 . 
+- docker build -t teamtmdimage:latest . 
+
     - This is running the docker build command to generate our project image 
     - -t is letting us specify our name tag
     - . is looking at our root for a file called Dockerfile
+
+- docker build --platform linux/amd64 -t team_tmd_image:v1.0 . 
+    - M2 chip command 
 
 - docker run --name teamtmdapp -p 8000:8000 teamtmdimage:v1
     - This command is launching our docker container from our image. 
@@ -58,6 +63,16 @@ Docker Container Running:
 
 - docker rm #####
     - delete a docker container 
+
+- docker tag team_tmd_image:v1.1 XXXXXXXXX/opp-app:latest
+    - tag our image to push to ECR 
+- ff1f
+    - Sending the Dockerfile to the ECR
+## AWS
+- aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 680546755927.dkr.ecr.us-east-2.amazonaws.com
+    - Log into ECR
+- docker run -d --name opp-api -p 8000:8000 680546755927.dkr.ecr.us-east-2.amazonaws.com/opp-app:v1.0
+    - Run docker from EC2 instance
 
 ## Running Pylint 
 
