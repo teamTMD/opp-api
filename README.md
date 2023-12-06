@@ -68,8 +68,10 @@ Docker Container Running:
     - tag our image to push to ECR 
 - ff1f
     - Sending the Dockerfile to the ECR
-## AWS
-- aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 680546755927.dkr.ecr.us-east-2.amazonaws.com
+
+
+# Milestone 4B Submittal
+- aws ecr get-login-password --region us-ea`st-2 | docker login --username AWS --password-stdin 680546755927.dkr.ecr.us-east-2.amazonaws.com
     - Log into ECR
 - docker run -d --name opp-api -p 8000:8000 680546755927.dkr.ecr.us-east-2.amazonaws.com/opp-app:v1.0
     - Run docker from EC2 instance
