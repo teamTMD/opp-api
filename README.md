@@ -71,6 +71,10 @@ Docker Container Running:
 
 
 # Milestone 4B Submittal
+
+- Public URL to APP:
+    - http://ec2-3-15-210-160.us-east-2.compute.amazonaws.com:8000/docs
+<br/>
 - aws ecr get-login-password --region us-ea`st-2 | docker login --username AWS --password-stdin 680546755927.dkr.ecr.us-east-2.amazonaws.com
     - Log into ECR
 - docker run -d --name opp-api -p 8000:8000 680546755927.dkr.ecr.us-east-2.amazonaws.com/opp-app:v1.0
