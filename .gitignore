@@ -172,3 +172,5 @@ node_modules/
 package-lock.json
 
 package.json
+
+payment_app.db
