@@ -11,6 +11,8 @@ from routers.helpers import check_user_authentication
 from models.models import Transactions
 from db.database import SessionLocal
 
+#import datetime
+from datetime import date
 router = APIRouter(prefix="/transactions", tags=["transactions"])
 
 
@@ -41,7 +43,7 @@ class TransactionRequest(BaseModel):
     ipLocationCity: str = Field(min_length=3)
     ipLocationState: str = Field(min_length=2)
     transactionAmount: int = Field(gt=0)
-    transactionDate: str = Field(min_length=3)
+    transactionDate: date
     processed: bool
 
 
