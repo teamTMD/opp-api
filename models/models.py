@@ -4,6 +4,8 @@ from sqlalchemy.orm import relationship
 
 from enum import Enum as PythonEnum
 from sqlalchemy import Enum, Date
+from datetime import date
+
 
 
 class Users(Base):
@@ -70,6 +72,6 @@ class Transactions(Base):
     ipLocationCity = Column(String)
     ipLocationState = Column(String)
     transactionAmount = Column(Integer)
-    transactionDate = Column(String)
+    transactionDate = Column(Date)
     processed = Column(Boolean, default=False)
     userId = Column(Integer, ForeignKey("users.id"))
