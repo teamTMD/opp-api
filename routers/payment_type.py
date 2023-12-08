@@ -47,7 +47,7 @@ class PaymentTypeRequest(BaseModel):
 # Get all payment types
 @router.get("/read-all")
 async def read_all(user: user_dependency, db: db_dependency):
-    check_user_authentication(user)
+    check_admin_user_auth(user)
     return db.query(PaymentType).all()
 
 
@@ -172,3 +172,9 @@ async def process_card(
     else:
         print("Hitting else statement")
         return response.text
+    
+
+def check_admin_user_auth(user):
+    # Fixed Typo
+    if user.get("user_role").lower() != "admin":
+        raise HTTPException(status_code=401, detail="Authentication Failed, not an admin")
