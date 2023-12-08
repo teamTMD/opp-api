@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from routers.auth import get_current_user
 from routers.helpers import check_user_authentication
+from routers.helpers import check_user_authentication_admin
 
 from models.models import Users
 from db.database import SessionLocal
@@ -31,14 +32,17 @@ user_dependency = Annotated[dict, (Depends(get_current_user))]
 # Return all business owners
 @router.get("/business-owners", status_code=status.HTTP_200_OK)
 async def read_all_business_owners(user: user_dependency, db: db_dependency):
-    check_user_authentication(user)
+    # check_user_authentication(user)
+    check_user_authentication_admin(user)
     return db.query(Users).filter(Users.role == "business_owner").all()
 
 
 # Return all developers
 @router.get("/developers", status_code=status.HTTP_200_OK)
 async def read_all_developers(user: user_dependency, db: db_dependency):
-    check_user_authentication(user)
+    # check_user_authentication(user)
+    check_user_authentication_admin(user)
+
     return db.query(Users).filter(Users.role == "developer").all()
 
 
